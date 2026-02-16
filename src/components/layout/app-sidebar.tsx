@@ -1,201 +1,211 @@
-"use client";
+'use client';
 
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import {
-  ChevronRight,
-  Contact,
+  ArrowLeftRight,
+  ChevronDown,
+  Crown,
   FileText,
-  History,
-  LayoutDashboard,
-  Mail,
-  Megaphone,
-  Moon,
-  Settings,
-  Sun,
+  Home,
+  List,
+  MessageSquare,
+  PieChart,
+  ShoppingCart,
   Target,
-  User,
-} from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
+  Users,
+  Zap,
+} from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-  useSidebar,
-} from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+interface NavItem {
+  title: string;
+  url: string;
+  icon: React.ElementType;
+  badge?: string;
+  children?: NavItem[];
+  premium?: boolean;
+}
 
-const mainNavItems = [
+const navigation: NavItem[] = [
   {
-    title: "Dashboard",
-    url: "/",
-    icon: LayoutDashboard,
+    title: 'Inicio',
+    url: '/',
+    icon: Home,
   },
   {
-    title: "Audiencias",
-    url: "/audience",
+    title: 'CRM',
+    url: '/crm',
     icon: Target,
+    children: [
+      { title: 'Todos los contactos', url: '/crm', icon: Users },
+      { title: 'Listas', url: '/crm/lists', icon: List },
+      { title: 'Segmentos', url: '/crm/segments', icon: PieChart },
+      { title: 'Leads', url: '/crm/leads', icon: Target },
+    ],
   },
   {
-    title: "Enviar Correo",
-    url: "/send",
-    icon: Mail,
+    title: 'Marketing',
+    url: '/campaigns',
+    icon: Zap,
+    children: [
+      { title: 'Campañas', url: '/campaigns', icon: Target },
+      {
+        title: 'Landing pages',
+        url: '/landing-pages',
+        icon: FileText,
+        premium: true,
+      },
+      { title: 'Formularios', url: '/forms', icon: FileText },
+      { title: 'Estadísticas', url: '/analytics', icon: PieChart },
+      { title: 'Plantillas', url: '/templates', icon: FileText },
+    ],
   },
   {
-    title: "Campañas",
-    url: "/campaigns",
-    icon: Megaphone,
+    title: 'Automatizaciones',
+    url: '/automations',
+    icon: Zap,
   },
   {
-    title: "Plantillas",
-    url: "/templates",
-    icon: FileText,
+    title: 'Transaccional',
+    url: '/transactional',
+    icon: ArrowLeftRight,
   },
   {
-    title: "Contactos",
-    url: "/contacts",
-    icon: Contact,
+    title: 'Conversaciones',
+    url: '/conversations',
+    icon: MessageSquare,
   },
   {
-    title: "Historial",
-    url: "/history",
-    icon: History,
+    title: 'Comercio',
+    url: '/commerce',
+    icon: ShoppingCart,
   },
 ];
 
-export function AppSidebar() {
-  const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
-  const { open } = useSidebar();
+function NavItemComponent({
+  item,
+  expanded,
+  onToggle,
+  pathname,
+}: {
+  item: NavItem;
+  expanded: boolean;
+  onToggle: () => void;
+  pathname: string;
+}) {
+  const Icon = item.icon;
+  const hasChildren = item.children && item.children.length > 0;
+  const isActive = pathname === item.url || pathname.startsWith(item.url + '/');
+  const isChildActive = item.children?.some(
+    (child) => pathname === child.url || pathname.startsWith(child.url + '/')
+  );
+
+  if (hasChildren) {
+    return (
+      <div className="space-y-1">
+        <Button
+          variant="ghost"
+          onClick={onToggle}
+          className={cn(
+            'w-full justify-between px-3 py-2 h-10 text-sm font-medium transition-colors',
+            isActive || isChildActive
+              ? 'bg-[#E6F9F0] text-[#00D26A]'
+              : 'text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#1A1A1A]'
+          )}
+        >
+          <div className="flex items-center gap-3">
+            <Icon className="h-5 w-5" />
+            <span>{item.title}</span>
+          </div>
+          <ChevronDown
+            className={cn(
+              'h-4 w-4 transition-transform',
+              expanded && 'rotate-180'
+            )}
+          />
+        </Button>
+        {expanded && (
+          <div className="ml-4 pl-4 border-l border-[#E5E7EB] space-y-1">
+            {item.children?.map((child) => (
+              <a
+                key={child.url}
+                href={child.url}
+                className={cn(
+                  'flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-colors',
+                  pathname === child.url
+                    ? 'bg-[#E6F9F0] text-[#00D26A] font-medium'
+                    : 'text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#1A1A1A]'
+                )}
+              >
+                <child.icon className="h-4 w-4" />
+                <span>{child.title}</span>
+                {child.premium && (
+                  <Crown className="h-3 w-3 text-[#FBBF24] ml-auto" />
+                )}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
-    <Sidebar
-      collapsible="icon"
-      className="border-r border-sidebar-border"
+    <a
+      href={item.url}
+      className={cn(
+        'flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors',
+        isActive
+          ? 'bg-[#E6F9F0] text-[#00D26A]'
+          : 'text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#1A1A1A]'
+      )}
     >
-      <SidebarHeader className="border-b border-sidebar-border px-4 py-4">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Mail className="h-4 w-4" />
-          </div>
-          {open && (
-            <div className="flex flex-col">
-              <span className="font-semibold text-sm">Email Manager</span>
-              <span className="text-xs text-muted-foreground">Panel de control</span>
-            </div>
-          )}
-        </div>
-      </SidebarHeader>
+      <Icon className="h-5 w-5" />
+      <span>{item.title}</span>
+      {item.badge && (
+        <span className="ml-auto text-xs bg-[#E6F9F0] text-[#00D26A] px-2 py-0.5 rounded-full">
+          {item.badge}
+        </span>
+      )}
+      {item.premium && <Crown className="h-3 w-3 text-[#FBBF24] ml-auto" />}
+    </a>
+  );
+}
 
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Navegación</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {mainNavItems.map((item) => (
-                <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.url}
-                    tooltip={item.title}
-                  >
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+export function AppSidebar() {
+  const pathname = usePathname();
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({
+    '/contacts': pathname.startsWith('/contacts'),
+    '/campaigns':
+      pathname.startsWith('/campaigns') ||
+      pathname.startsWith('/landing') ||
+      pathname.startsWith('/forms') ||
+      pathname.startsWith('/analytics') ||
+      pathname.startsWith('/templates'),
+  });
 
-        <SidebarGroup className="mt-auto">
-          <SidebarGroupLabel>Preferencias</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  asChild
-                  isActive={pathname === "/settings"}
-                  tooltip="Configuración"
-                >
-                  <a href="/settings">
-                    <Settings />
-                    <span>Configuración</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  tooltip={theme === "dark" ? "Modo claro" : "Modo oscuro"}
-                >
-                  {theme === "dark" ? (
-                    <>
-                      <Sun className="h-4 w-4" />
-                      <span>Modo claro</span>
-                    </>
-                  ) : (
-                    <>
-                      <Moon className="h-4 w-4" />
-                      <span>Modo oscuro</span>
-                    </>
-                  )}
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
+  const toggleItem = (url: string) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [url]: !prev[url],
+    }));
+  };
 
-      <SidebarFooter className="border-t border-sidebar-border p-2">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="w-full justify-start gap-2 px-2"
-            >
-              <Avatar className="h-6 w-6">
-                <AvatarFallback className="bg-primary/10 text-xs">
-                  <User className="h-3 w-3" />
-                </AvatarFallback>
-              </Avatar>
-              {open && (
-                <>
-                  <span className="flex-1 text-left text-sm">Administrador</span>
-                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                </>
-              )}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-56">
-            <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Perfil</DropdownMenuItem>
-            <DropdownMenuItem>Cerrar sesión</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </SidebarFooter>
-
-      <SidebarRail />
-    </Sidebar>
+  return (
+    <aside className="fixed left-0 top-16 z-40 h-[calc(100vh-4rem)] w-64 border-r border-[#E5E7EB] bg-white overflow-y-auto">
+      <nav className="flex flex-col gap-1 p-4">
+        {navigation.map((item) => (
+          <NavItemComponent
+            key={item.url}
+            item={item}
+            expanded={expandedItems[item.url] || false}
+            onToggle={() => toggleItem(item.url)}
+            pathname={pathname}
+          />
+        ))}
+      </nav>
+    </aside>
   );
 }

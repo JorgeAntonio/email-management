@@ -1,152 +1,278 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Plus, Play, Eye, MoreHorizontal } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+"use client";
 
-const campaigns = [
-  { id: 1, name: "Newsletter Mensual - Febrero", date: "2026-02-15", recipients: 1250, status: "Completada", opens: 68.5, clicks: 24.3 },
-  { id: 2, name: "Promoción de Verano 2026", date: "2026-02-14", recipients: 2500, status: "Enviando", opens: 0, clicks: 0 },
-  { id: 3, name: "Actualización de Producto v2.0", date: "2026-02-12", recipients: 800, status: "Completada", opens: 72.1, clicks: 31.2 },
-  { id: 4, name: "Bienvenida Nuevos Clientes", date: "2026-02-10", recipients: 150, status: "Completada", opens: 85.3, clicks: 45.7 },
-  { id: 5, name: "Recordatorio de Pago", date: "2026-02-08", recipients: 320, status: "Programada", opens: 0, clicks: 0 },
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Mail,
+  MessageSquare,
+  Phone,
+  Bell,
+  Crown,
+  ChevronRight,
+} from "lucide-react";
+
+const campaignTypes = [
+  {
+    id: "email",
+    title: "Email",
+    description: "Crea y envía campañas de email profesionales",
+    icon: Mail,
+    color: "bg-[#E6F9F0]",
+    iconColor: "text-[#00D26A]",
+    borderColor: "border-[#00D26A]",
+    premium: false,
+  },
+  {
+    id: "sms",
+    title: "SMS",
+    description: "Envía mensajes de texto a tus contactos",
+    icon: MessageSquare,
+    color: "bg-[#EEF2FF]",
+    iconColor: "text-[#6366F1]",
+    borderColor: "border-[#6366F1]",
+    premium: false,
+  },
+  {
+    id: "whatsapp",
+    title: "WhatsApp",
+    description: "Conecta con tus clientes por WhatsApp",
+    icon: Phone,
+    color: "bg-[#FEF3C7]",
+    iconColor: "text-[#F59E0B]",
+    borderColor: "border-[#F59E0B]",
+    premium: true,
+  },
+  {
+    id: "push",
+    title: "Push",
+    description: "Envía notificaciones push a tus usuarios",
+    icon: Bell,
+    color: "bg-[#FCE7F3]",
+    iconColor: "text-[#EC4899]",
+    borderColor: "border-[#EC4899]",
+    premium: true,
+  },
 ];
 
 export default function CampaignsPage() {
   return (
-    <div className="flex-1 space-y-6 p-8">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Campañas</h1>
-          <p className="text-muted-foreground">
-            Gestiona tus campañas de email marketing
-          </p>
+      <div>
+        <h1 className="text-3xl font-bold text-[#1A1A1A]">Campañas</h1>
+      </div>
+
+      {/* Hero Section */}
+      <div className="text-center max-w-3xl mx-auto py-8">
+        <h2 className="text-2xl font-semibold text-[#1A1A1A] mb-4">
+          Tus clientes nunca han estado tan cerca
+        </h2>
+        <p className="text-[#6B7280] mb-2">
+          No importa cómo quieras llegar a tus clientes, tenemos el canal de marketing adecuado para ti.
+        </p>
+        <p className="text-[#1A1A1A] font-medium">
+          ¿Qué tipo de campaña quieres crear?
+        </p>
+      </div>
+
+      {/* Campaign Type Cards */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {campaignTypes.map((type) => {
+          const Icon = type.icon;
+          return (
+            <Card
+              key={type.id}
+              className={`group cursor-pointer border-2 border-transparent hover:${type.borderColor} transition-all duration-200 hover:shadow-lg`}
+            >
+              <CardContent className="p-6">
+                <div className="flex flex-col items-center text-center">
+                  {/* Icon Container */}
+                  <div
+                    className={`w-20 h-20 ${type.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200`}
+                  >
+                    <Icon className={`h-10 w-10 ${type.iconColor}`} />
+                  </div>
+
+                  {/* Title */}
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-lg font-semibold text-[#1A1A1A]">
+                      {type.title}
+                    </h3>
+                    {type.premium && (
+                      <Crown className="h-4 w-4 text-[#FBBF24]" />
+                    )}
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-[#6B7280] mb-4">
+                    {type.description}
+                  </p>
+
+                  {/* Action Button */}
+                  <Button
+                    variant="ghost"
+                    className={`gap-1 ${type.iconColor} hover:${type.color}`}
+                  >
+                    Crear campaña
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+
+      {/* Recent Campaigns Section */}
+      <div className="pt-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold text-[#1A1A1A]">
+            Campañas recientes
+          </h2>
+          <Button variant="link" className="text-[#6366F1]">
+            Ver todas
+          </Button>
         </div>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-            Nueva Campaña
-        </Button>
+
+        <Card className="border-[#E5E7EB]">
+          <CardContent className="p-8">
+            <div className="flex flex-col items-center justify-center text-center">
+              {/* Empty state illustration */}
+              <div className="relative mb-6">
+                <svg
+                  width="200"
+                  height="150"
+                  viewBox="0 0 200 150"
+                  fill="none"
+                  className="mx-auto"
+                >
+                  {/* Background */}
+                  <ellipse
+                    cx="100"
+                    cy="120"
+                    rx="80"
+                    ry="20"
+                    fill="#E6F9F0"
+                  />
+                  
+                  {/* Envelope */}
+                  <rect
+                    x="60"
+                    y="50"
+                    width="80"
+                    height="60"
+                    rx="4"
+                    fill="#00D26A"
+                    opacity="0.3"
+                  />
+                  <path
+                    d="M60 55 L100 85 L140 55"
+                    stroke="#00D26A"
+                    strokeWidth="3"
+                    fill="none"
+                  />
+                  <path
+                    d="M60 110 L85 85"
+                    stroke="#00D26A"
+                    strokeWidth="2"
+                    opacity="0.5"
+                  />
+                  <path
+                    d="M140 110 L115 85"
+                    stroke="#00D26A"
+                    strokeWidth="2"
+                    opacity="0.5"
+                  />
+                  
+                  {/* Decorative elements */}
+                  <circle cx="40" cy="60" r="4" fill="#00D26A" opacity="0.4" />
+                  <circle cx="160" cy="50" r="3" fill="#00D26A" opacity="0.3" />
+                  <circle cx="45" cy="100" r="2" fill="#00D26A" opacity="0.5" />
+                  
+                  {/* Stars/sparkles */}
+                  <path
+                    d="M165 75 L167 80 L172 82 L167 84 L165 89 L163 84 L158 82 L163 80 Z"
+                    fill="#00D26A"
+                    opacity="0.6"
+                  />
+                </svg>
+              </div>
+
+              <h3 className="text-lg font-semibold text-[#1A1A1A] mb-2">
+                Aún no has creado ninguna campaña
+              </h3>
+              <p className="text-sm text-[#6B7280] max-w-md mb-6">
+                Crea tu primera campaña para comenzar a conectar con tus contactos. 
+                Elige el canal que prefieras: Email, SMS, WhatsApp o notificaciones Push.
+              </p>
+              <Button className="gap-2 bg-[#00D26A] hover:bg-[#00B85C]">
+                <Mail className="h-4 w-4" />
+                Crear primera campaña
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Campañas</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">24</div>
+      {/* Tips Section */}
+      <div className="grid gap-6 md:grid-cols-3 pt-8">
+        <Card className="border-[#E5E7EB]">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="h-10 w-10 rounded-lg bg-[#E6F9F0] flex items-center justify-center flex-shrink-0">
+                <Mail className="h-5 w-5 text-[#00D26A]" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-[#1A1A1A] mb-1">
+                  Email Marketing
+                </h4>
+                <p className="text-sm text-[#6B7280]">
+                  El canal más efectivo para nutrir leads y fidelizar clientes. 
+                  Alcanza hasta un 4400% de ROI.
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Enviadas este mes</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">8</div>
+
+        <Card className="border-[#E5E7EB]">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="h-10 w-10 rounded-lg bg-[#EEF2FF] flex items-center justify-center flex-shrink-0">
+                <MessageSquare className="h-5 w-5 text-[#6366F1]" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-[#1A1A1A] mb-1">
+                  SMS Marketing
+                </h4>
+                <p className="text-sm text-[#6B7280]">
+                  Mensajes directos con alta tasa de apertura (98%). 
+                  Ideal para ofertas urgentes y recordatorios.
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Programadas</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">3</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Borradores</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">5</div>
+
+        <Card className="border-[#E5E7EB]">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="h-10 w-10 rounded-lg bg-[#FEF3C7] flex items-center justify-center flex-shrink-0">
+                <Phone className="h-5 w-5 text-[#F59E0B]" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-[#1A1A1A] mb-1">
+                  WhatsApp Business
+                </h4>
+                <p className="text-sm text-[#6B7280]">
+                  Conecta con tus clientes en su app favorita. 
+                  Mensajes personalizados con alta engagement.
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
-
-      {/* Campaigns Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Todas las Campañas</CardTitle>
-          <CardDescription>
-            Lista completa de tus campañas de correo
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Nombre</TableHead>
-                <TableHead>Fecha</TableHead>
-                <TableHead>Destinatarios</TableHead>
-                <TableHead>Estado</TableHead>
-                <TableHead>Apertura</TableHead>
-                <TableHead>Clics</TableHead>
-                <TableHead className="w-[50px]"></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {campaigns.map((campaign) => (
-                <TableRow key={campaign.id}>
-                  <TableCell className="font-medium">{campaign.name}</TableCell>
-                  <TableCell>{campaign.date}</TableCell>
-                  <TableCell>{campaign.recipients.toLocaleString()}</TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        campaign.status === "Completada"
-                          ? "default"
-                          : campaign.status === "Enviando"
-                          ? "secondary"
-                          : "outline"
-                      }
-                    >
-                      {campaign.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>{campaign.opens > 0 ? `${campaign.opens}%` : "-"}</TableCell>
-                  <TableCell>{campaign.clicks > 0 ? `${campaign.clicks}%` : "-"}</TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm">
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem>
-                          <Eye className="mr-2 h-4 w-4" />
-                          Ver detalles
-                        </DropdownMenuItem>
-                        {campaign.status === "Borrador" && (
-                          <DropdownMenuItem>
-                            <Play className="mr-2 h-4 w-4" />
-                            Enviar ahora
-                          </DropdownMenuItem>
-                        )}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
     </div>
   );
 }

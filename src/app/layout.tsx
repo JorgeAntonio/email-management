@@ -1,10 +1,9 @@
-import { AppSidebar } from "@/components/layout/app-sidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
+import { TopHeader } from "@/components/layout/top-header";
+import { AppSidebar } from "@/components/layout/app-sidebar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Email Management",
-  description: "Sistema de gestión de correos electrónicos",
+  title: "Brevo - Email Marketing & CRM",
+  description: "Plataforma de marketing y CRM",
 };
 
 export default function RootLayout({
@@ -28,24 +27,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F5F7FA]`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider>
-            <SidebarProvider>
+        <TooltipProvider>
+          <div className="min-h-screen flex flex-col">
+            <TopHeader />
+            <div className="flex flex-1">
               <AppSidebar />
-              <main className="flex-1 overflow-auto">{children}</main>
-            </SidebarProvider>
-            <Toaster />
-          </TooltipProvider>
-        </ThemeProvider>
+              <main className="flex-1 ml-64 p-8">
+                {children}
+              </main>
+            </div>
+          </div>
+          <Toaster />
+        </TooltipProvider>
       </body>
     </html>
   );
