@@ -55,44 +55,40 @@ export function TopHeader() {
           </Button>
 
           {/* Help */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-[#6B7280] hover:text-[#1A1A1A]"
-          >
-            <HelpCircle className="h-5 w-5" />
-          </Button>
+          <Link href="/dashboard/help">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-[#6B7280] hover:text-[#1A1A1A]"
+            >
+              <HelpCircle className="h-5 w-5" />
+            </Button>
+          </Link>
 
           {/* Settings */}
-          <Button
-            asChild
-            variant="ghost"
-            size="icon"
-            className="text-[#6B7280] hover:text-[#1A1A1A]"
-          >
-            <>
-              <Link href="/dashboard/settings">
-                <Settings className="h-5 w-5" />
-              </Link>
-            </>
-          </Button>
+          <Link href="/dashboard/settings">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-[#6B7280] hover:text-[#1A1A1A]"
+            >
+              <Settings className="h-5 w-5" />
+            </Button>
+          </Link>
 
           {/* Notifications */}
-          <Button
-            asChild
-            variant="ghost"
-            size="icon"
-            className="text-[#6B7280] hover:text-[#1A1A1A] relative"
-          >
-            <>
-              <Link href="/dashboard/notifications">
-                <Bell className="h-5 w-5" />
-              </Link>
+          <Link href="/dashboard/notifications">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-[#6B7280] hover:text-[#1A1A1A] relative"
+            >
+              <Bell className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-[#EF4444] text-[10px] font-medium text-white flex items-center justify-center">
                 3
               </span>
-            </>
-          </Button>
+            </Button>
+          </Link>
 
           {/* User Menu */}
           <DropdownMenu>
