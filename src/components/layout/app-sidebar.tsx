@@ -11,6 +11,7 @@ import {
   Moon,
   Settings,
   Sun,
+  Target,
   User,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -46,6 +47,11 @@ const mainNavItems = [
     title: "Dashboard",
     url: "/",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Audiencias",
+    url: "/audience",
+    icon: Target,
   },
   {
     title: "Enviar Correo",

@@ -1,10 +1,10 @@
+import { AppSidebar } from "@/components/layout/app-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
-import { ThemeProvider } from "next-themes";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/layout/app-sidebar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -41,9 +41,7 @@ export default function RootLayout({
           <TooltipProvider>
             <SidebarProvider>
               <AppSidebar />
-              <main className="flex-1 overflow-auto">
-                {children}
-              </main>
+              <main className="flex-1 overflow-auto">{children}</main>
             </SidebarProvider>
             <Toaster />
           </TooltipProvider>
