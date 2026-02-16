@@ -11,6 +11,7 @@ import {
   List,
   MessageSquare,
   PieChart,
+  Send,
   ShoppingCart,
   Target,
   Users,
@@ -34,6 +35,11 @@ const navigation: NavItem[] = [
     title: 'Inicio',
     url: '/dashboard',
     icon: Home,
+  },
+  {
+    title: 'Envíos',
+    url: '/dashboard/send',
+    icon: Send,
   },
   {
     title: 'CRM',
@@ -62,6 +68,11 @@ const navigation: NavItem[] = [
       { title: 'Estadísticas', url: '/dashboard/analytics', icon: PieChart },
       { title: 'Plantillas', url: '/dashboard/templates', icon: FileText },
     ],
+  },
+  {
+    title: 'Historial',
+    url: '/dashboard/history',
+    icon: FileText,
   },
   {
     title: 'Automatizaciones',
