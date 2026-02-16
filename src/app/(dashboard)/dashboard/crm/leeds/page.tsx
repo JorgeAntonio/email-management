@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
-  Plus,
-  Search,
-  Filter,
-  MoreHorizontal,
-  Mail,
+  Building2,
   Calendar,
   DollarSign,
-  Building2,
-} from "lucide-react";
+  Filter,
+  Mail,
+  MoreHorizontal,
+  Plus,
+  Search,
+} from 'lucide-react';
+import { useState } from 'react';
 
 // Tipos para el CRM
 interface Deal {
@@ -39,7 +39,7 @@ interface Deal {
   stage: string;
   expectedCloseDate?: string;
   lastActivity?: string;
-  priority: "high" | "medium" | "low";
+  priority: 'high' | 'medium' | 'low';
 }
 
 interface Stage {
@@ -52,165 +52,165 @@ interface Stage {
 // Datos mock para el pipeline
 const initialStages: Stage[] = [
   {
-    id: "new",
-    name: "Nuevo",
-    color: "bg-[#E5E7EB]",
+    id: 'new',
+    name: 'Nuevo',
+    color: 'bg-[#E5E7EB]',
     deals: [
       {
         id: 1,
-        title: "Propuesta de software CRM",
+        title: 'Propuesta de software CRM',
         value: 15000,
-        currency: "USD",
+        currency: 'USD',
         contact: {
-          name: "Carlos Rodríguez",
-          email: "carlos@empresa.com",
-          company: "Tech Solutions SA",
-          phone: "+51 987 654 321",
+          name: 'Carlos Rodríguez',
+          email: 'carlos@empresa.com',
+          company: 'Tech Solutions SA',
+          phone: '+51 987 654 321',
         },
-        stage: "new",
-        expectedCloseDate: "2026-03-15",
-        lastActivity: "Hace 2 horas",
-        priority: "high",
+        stage: 'new',
+        expectedCloseDate: '2026-03-15',
+        lastActivity: 'Hace 2 horas',
+        priority: 'high',
       },
       {
         id: 2,
-        title: "Implementación de email marketing",
+        title: 'Implementación de email marketing',
         value: 8500,
-        currency: "USD",
+        currency: 'USD',
         contact: {
-          name: "Ana Martínez",
-          email: "ana@startup.io",
-          company: "Startup Innovadora",
+          name: 'Ana Martínez',
+          email: 'ana@startup.io',
+          company: 'Startup Innovadora',
         },
-        stage: "new",
-        lastActivity: "Hace 5 horas",
-        priority: "medium",
+        stage: 'new',
+        lastActivity: 'Hace 5 horas',
+        priority: 'medium',
       },
     ],
   },
   {
-    id: "qualified",
-    name: "Calificado",
-    color: "bg-[#EEF2FF]",
+    id: 'qualified',
+    name: 'Calificado',
+    color: 'bg-[#EEF2FF]',
     deals: [
       {
         id: 3,
-        title: "Servicio de automatización",
+        title: 'Servicio de automatización',
         value: 25000,
-        currency: "USD",
+        currency: 'USD',
         contact: {
-          name: "Pedro Sánchez",
-          email: "pedro@corp.com",
-          company: "Corporación Global",
-          phone: "+51 912 345 678",
+          name: 'Pedro Sánchez',
+          email: 'pedro@corp.com',
+          company: 'Corporación Global',
+          phone: '+51 912 345 678',
         },
-        stage: "qualified",
-        expectedCloseDate: "2026-03-20",
-        lastActivity: "Ayer",
-        priority: "high",
+        stage: 'qualified',
+        expectedCloseDate: '2026-03-20',
+        lastActivity: 'Ayer',
+        priority: 'high',
       },
     ],
   },
   {
-    id: "proposal",
-    name: "Propuesta",
-    color: "bg-[#FEF3C7]",
+    id: 'proposal',
+    name: 'Propuesta',
+    color: 'bg-[#FEF3C7]',
     deals: [
       {
         id: 4,
-        title: "Consultoría de marketing digital",
+        title: 'Consultoría de marketing digital',
         value: 12000,
-        currency: "USD",
+        currency: 'USD',
         contact: {
-          name: "María García",
-          email: "maria@marketing.com",
-          company: "Marketing Pro",
+          name: 'María García',
+          email: 'maria@marketing.com',
+          company: 'Marketing Pro',
         },
-        stage: "proposal",
-        expectedCloseDate: "2026-02-28",
-        lastActivity: "Hace 3 días",
-        priority: "medium",
+        stage: 'proposal',
+        expectedCloseDate: '2026-02-28',
+        lastActivity: 'Hace 3 días',
+        priority: 'medium',
       },
       {
         id: 5,
-        title: "Licencias enterprise",
+        title: 'Licencias enterprise',
         value: 45000,
-        currency: "USD",
+        currency: 'USD',
         contact: {
-          name: "Juan Pérez",
-          email: "juan@enterprise.com",
-          company: "Enterprise Solutions",
-          phone: "+51 945 678 901",
+          name: 'Juan Pérez',
+          email: 'juan@enterprise.com',
+          company: 'Enterprise Solutions',
+          phone: '+51 945 678 901',
         },
-        stage: "proposal",
-        expectedCloseDate: "2026-04-01",
-        lastActivity: "Hace 1 día",
-        priority: "high",
+        stage: 'proposal',
+        expectedCloseDate: '2026-04-01',
+        lastActivity: 'Hace 1 día',
+        priority: 'high',
       },
     ],
   },
   {
-    id: "negotiation",
-    name: "Negociación",
-    color: "bg-[#E6F9F0]",
+    id: 'negotiation',
+    name: 'Negociación',
+    color: 'bg-[#E6F9F0]',
     deals: [
       {
         id: 6,
-        title: "Migración de plataforma",
+        title: 'Migración de plataforma',
         value: 35000,
-        currency: "USD",
+        currency: 'USD',
         contact: {
-          name: "Laura Torres",
-          email: "laura@techcorp.com",
-          company: "TechCorp International",
+          name: 'Laura Torres',
+          email: 'laura@techcorp.com',
+          company: 'TechCorp International',
         },
-        stage: "negotiation",
-        expectedCloseDate: "2026-02-20",
-        lastActivity: "Hace 4 horas",
-        priority: "high",
+        stage: 'negotiation',
+        expectedCloseDate: '2026-02-20',
+        lastActivity: 'Hace 4 horas',
+        priority: 'high',
       },
     ],
   },
   {
-    id: "won",
-    name: "Ganado",
-    color: "bg-[#00D26A]",
+    id: 'won',
+    name: 'Ganado',
+    color: 'bg-[#00D26A]',
     deals: [
       {
         id: 7,
-        title: "Suscripción anual",
+        title: 'Suscripción anual',
         value: 18000,
-        currency: "USD",
+        currency: 'USD',
         contact: {
-          name: "Diego López",
-          email: "diego@cliente.com",
-          company: "Cliente Premium SA",
+          name: 'Diego López',
+          email: 'diego@cliente.com',
+          company: 'Cliente Premium SA',
         },
-        stage: "won",
-        expectedCloseDate: "2026-02-10",
-        lastActivity: "Cerrado hoy",
-        priority: "medium",
+        stage: 'won',
+        expectedCloseDate: '2026-02-10',
+        lastActivity: 'Cerrado hoy',
+        priority: 'medium',
       },
     ],
   },
   {
-    id: "lost",
-    name: "Perdido",
-    color: "bg-[#FEE2E2]",
+    id: 'lost',
+    name: 'Perdido',
+    color: 'bg-[#FEE2E2]',
     deals: [
       {
         id: 8,
-        title: "Proyecto de consultoría",
+        title: 'Proyecto de consultoría',
         value: 8000,
-        currency: "USD",
+        currency: 'USD',
         contact: {
-          name: "Sofia Ruiz",
-          email: "sofia@otra.com",
-          company: "Otra Empresa",
+          name: 'Sofia Ruiz',
+          email: 'sofia@otra.com',
+          company: 'Otra Empresa',
         },
-        stage: "lost",
-        lastActivity: "Cerrado ayer",
-        priority: "low",
+        stage: 'lost',
+        lastActivity: 'Cerrado ayer',
+        priority: 'low',
       },
     ],
   },
@@ -218,14 +218,14 @@ const initialStages: Stage[] = [
 
 function DealCard({ deal }: { deal: Deal }) {
   const priorityColors = {
-    high: "bg-[#EF4444] text-white",
-    medium: "bg-[#F59E0B] text-white",
-    low: "bg-[#6B7280] text-white",
+    high: 'bg-[#EF4444] text-white',
+    medium: 'bg-[#F59E0B] text-white',
+    low: 'bg-[#6B7280] text-white',
   };
 
   const formatCurrency = (value: number, currency: string) => {
-    return new Intl.NumberFormat("es-PE", {
-      style: "currency",
+    return new Intl.NumberFormat('es-PE', {
+      style: 'currency',
       currency: currency,
       minimumFractionDigits: 0,
     }).format(value);
@@ -266,11 +266,11 @@ function DealCard({ deal }: { deal: Deal }) {
             {formatCurrency(deal.value, deal.currency)}
           </span>
           <Badge className={`text-xs ${priorityColors[deal.priority]}`}>
-            {deal.priority === "high"
-              ? "Alta"
-              : deal.priority === "medium"
-              ? "Media"
-              : "Baja"}
+            {deal.priority === 'high'
+              ? 'Alta'
+              : deal.priority === 'medium'
+                ? 'Media'
+                : 'Baja'}
           </Badge>
         </div>
 
@@ -319,7 +319,7 @@ function DealCard({ deal }: { deal: Deal }) {
 
 export default function CRMPage() {
   const [stages] = useState<Stage[]>(initialStages);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Calcular totales
   const totalDeals = stages.reduce((acc, stage) => acc + stage.deals.length, 0);
@@ -330,20 +330,20 @@ export default function CRMPage() {
   );
 
   const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("es-PE", {
-      style: "currency",
-      currency: "USD",
+    return new Intl.NumberFormat('es-PE', {
+      style: 'currency',
+      currency: 'USD',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);
   };
 
   return (
-    <div className="space-y-6 h-full">
+    <div className="space-y-6 h-full container">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-[#1A1A1A]">CRM</h1>
+          <h1 className="text-3xl font-bold text-[#1A1A1A]">Leeds</h1>
           <p className="text-sm text-[#6B7280] mt-1">
             Gestiona tus oportunidades y pipeline de ventas
           </p>
@@ -364,7 +364,7 @@ export default function CRMPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-4 container">
         <Card className="border-[#E5E7EB]">
           <CardContent className="p-4">
             <p className="text-sm text-[#6B7280]">Total oportunidades</p>
@@ -394,7 +394,7 @@ export default function CRMPage() {
       </div>
 
       {/* Filters */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 container">
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" />
           <Input
@@ -407,7 +407,7 @@ export default function CRMPage() {
       </div>
 
       {/* Pipeline */}
-      <div className="flex gap-4 overflow-x-auto pb-4">
+      <div className="flex gap-4 overflow-x-auto pb-4 container">
         {stages.map((stage) => (
           <div key={stage.id} className="flex-shrink-0 w-80">
             {/* Stage Header */}

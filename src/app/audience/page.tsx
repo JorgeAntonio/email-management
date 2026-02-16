@@ -26,7 +26,7 @@ import {
   BarChart3,
   PieChart,
 } from "lucide-react";
-import { Contact } from "@/components/audience-selector";
+import { Contact } from "@/modules/audience/audience-selector";
 
 // Mock data extendido
 const mockContacts: Contact[] = [

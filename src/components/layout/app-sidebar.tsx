@@ -16,6 +16,7 @@ import {
   Users,
   Zap,
 } from 'lucide-react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
@@ -31,55 +32,55 @@ interface NavItem {
 const navigation: NavItem[] = [
   {
     title: 'Inicio',
-    url: '/',
+    url: '/dashboard',
     icon: Home,
   },
   {
     title: 'CRM',
-    url: '/crm',
+    url: '/dashboard/crm',
     icon: Target,
     children: [
-      { title: 'Todos los contactos', url: '/crm', icon: Users },
-      { title: 'Listas', url: '/crm/lists', icon: List },
-      { title: 'Segmentos', url: '/crm/segments', icon: PieChart },
-      { title: 'Leads', url: '/crm/leads', icon: Target },
+      { title: 'Todos los contactos', url: '/dashboard/crm', icon: Users },
+      { title: 'Listas', url: '/dashboard/crm/lists', icon: List },
+      { title: 'Segmentos', url: '/dashboard/crm/segments', icon: PieChart },
+      { title: 'Leads', url: '/dashboard/crm/leeds', icon: Target },
     ],
   },
   {
     title: 'Marketing',
-    url: '/campaigns',
+    url: '/dashboard/campaigns',
     icon: Zap,
     children: [
-      { title: 'Campañas', url: '/campaigns', icon: Target },
+      { title: 'Campañas', url: '/dashboard/campaigns', icon: Target },
       {
         title: 'Landing pages',
-        url: '/landing-pages',
+        url: '/dashboard/landing-pages',
         icon: FileText,
         premium: true,
       },
-      { title: 'Formularios', url: '/forms', icon: FileText },
-      { title: 'Estadísticas', url: '/analytics', icon: PieChart },
-      { title: 'Plantillas', url: '/templates', icon: FileText },
+      { title: 'Formularios', url: '/dashboard/forms', icon: FileText },
+      { title: 'Estadísticas', url: '/dashboard/analytics', icon: PieChart },
+      { title: 'Plantillas', url: '/dashboard/templates', icon: FileText },
     ],
   },
   {
     title: 'Automatizaciones',
-    url: '/automations',
+    url: '/dashboard/automations',
     icon: Zap,
   },
   {
     title: 'Transaccional',
-    url: '/transactional',
+    url: '/dashboard/transactional',
     icon: ArrowLeftRight,
   },
   {
     title: 'Conversaciones',
-    url: '/conversations',
+    url: '/dashboard/conversations',
     icon: MessageSquare,
   },
   {
     title: 'Comercio',
-    url: '/commerce',
+    url: '/dashboard/commerce',
     icon: ShoppingCart,
   },
 ];
@@ -129,7 +130,7 @@ function NavItemComponent({
         {expanded && (
           <div className="ml-4 pl-4 border-l border-[#E5E7EB] space-y-1">
             {item.children?.map((child) => (
-              <a
+              <Link
                 key={child.url}
                 href={child.url}
                 className={cn(
@@ -144,7 +145,7 @@ function NavItemComponent({
                 {child.premium && (
                   <Crown className="h-3 w-3 text-[#FBBF24] ml-auto" />
                 )}
-              </a>
+              </Link>
             ))}
           </div>
         )}
@@ -153,7 +154,7 @@ function NavItemComponent({
   }
 
   return (
-    <a
+    <Link
       href={item.url}
       className={cn(
         'flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors',
@@ -170,7 +171,7 @@ function NavItemComponent({
         </span>
       )}
       {item.premium && <Crown className="h-3 w-3 text-[#FBBF24] ml-auto" />}
-    </a>
+    </Link>
   );
 }
 

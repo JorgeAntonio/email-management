@@ -10,9 +10,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { MetricsCards } from "@/components/analytics/metrics-cards";
-import { TimelineChart } from "@/components/analytics/timeline-chart";
-import { CampaignPerformanceTable } from "@/components/analytics/campaign-performance-table";
+import { MetricsCards } from "@/modules/analytics/metrics-cards";
+import { TimelineChart } from "@/modules/analytics/timeline-chart";
+import { CampaignPerformanceTable } from "@/modules/analytics/campaign-performance-table";
 import { Download, Calendar, TrendingUp, Users, Mail } from "lucide-react";
 
 export default function AnalyticsPage() {
