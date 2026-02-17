@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AudienceSelector, Contact } from "@/components/audience-selector";
+import { AudienceSelector, Contact } from "@/modules/audience/audience-selector";
 import { Mail, Send, Eye, Save, Code2, Users, Target, User } from "lucide-react";
 
 // Datos mock expandidos con campos adicionales
