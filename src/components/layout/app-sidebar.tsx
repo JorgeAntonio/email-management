@@ -7,6 +7,7 @@ import {
   ChevronDown,
   Crown,
   FileText,
+  Globe,
   Home,
   List,
   MessageSquare,
@@ -78,6 +79,11 @@ const navigation: NavItem[] = [
     title: 'Automatizaciones',
     url: '/dashboard/automations',
     icon: Zap,
+  },
+  {
+    title: 'Explorador APIs',
+    url: '/dashboard/api-explorer',
+    icon: Globe,
   },
   {
     title: 'Transaccional',
