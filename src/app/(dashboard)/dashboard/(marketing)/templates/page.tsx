@@ -191,7 +191,7 @@ export default function TemplatesPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg">
+              <div className="p-2 bg-gradient-to-br from-primary to-primary/80 rounded-lg">
                 <Layout className="h-6 w-6 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-slate-900">Plantillas</h1>
@@ -227,7 +227,7 @@ export default function TemplatesPage() {
                 <Button variant="outline" onClick={() => setEditingTemplate(null)}>
                   Cancelar
                 </Button>
-                <Button onClick={handleSaveEdit} className="bg-violet-600 hover:bg-violet-700">
+                <Button onClick={handleSaveEdit} className="bg-primary hover:bg-primary/90">
                   <Save className="h-4 w-4 mr-2" />
                   Guardar Cambios
                 </Button>
@@ -272,7 +272,7 @@ export default function TemplatesPage() {
                             <button
                               key={variable.key}
                               onClick={() => insertVariable(variable.key)}
-                              className="px-3 py-1.5 bg-violet-50 text-violet-700 rounded-lg text-sm hover:bg-violet-100 transition-colors"
+                              className="px-3 py-1.5 bg-primary/10 text-primary rounded-lg text-sm hover:bg-primary/20 transition-colors"
                               title={variable.description}
                             >
                               {variable.key}
@@ -297,7 +297,7 @@ export default function TemplatesPage() {
                           <button
                             key={index}
                             onClick={() => insertSnippet(snippet.html)}
-                            className="w-full text-left p-4 rounded-lg border border-slate-200 hover:border-violet-300 hover:bg-violet-50 transition-all"
+                            className="w-full text-left p-4 rounded-lg border border-slate-200 hover:border-primary/30 hover:bg-primary/10 transition-all"
                           >
                             <h4 className="font-medium text-slate-800">{snippet.name}</h4>
                             <p className="text-xs text-slate-500 mt-1 font-mono truncate">
@@ -417,7 +417,7 @@ export default function TemplatesPage() {
                   <CardContent className="p-5">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="font-semibold text-slate-900 group-hover:text-violet-600 transition-colors">
+                        <h3 className="font-semibold text-slate-900 group-hover:text-primary transition-colors">
                           {template.name}
                         </h3>
                         <p className="text-sm text-slate-500 mt-1 line-clamp-2">
@@ -538,7 +538,7 @@ export default function TemplatesPage() {
               <Button 
                 onClick={handleCreateTemplate}
                 disabled={!newTemplate.name || !newTemplate.description}
-                className="bg-violet-600 hover:bg-violet-700"
+                className="bg-primary hover:bg-primary/90"
               >
                 Crear Plantilla
               </Button>

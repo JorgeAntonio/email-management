@@ -488,7 +488,7 @@ export default function SendEmailPage() {
                     <p className="text-slate-500 mb-4">No tienes emails programados</p>
                     <Button
                       onClick={() => setActiveTab('compose')}
-                      className="bg-violet-600 hover:bg-violet-700"
+                      className="bg-primary hover:bg-primary/90"
                     >
                       Programar un email
                     </Button>

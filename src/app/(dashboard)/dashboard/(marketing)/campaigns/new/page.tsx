@@ -156,7 +156,7 @@ export default function NewCampaignPage() {
     name: "",
     subject: "",
     preheader: "",
-    sender: "jorge@brevo.com",
+    sender: "jorge@emailsent.com",
     replyTo: "",
     selectedTemplate: null as number | null,
     content: `Hola {{nombre}},
@@ -164,7 +164,7 @@ export default function NewCampaignPage() {
 Gracias por ser parte de nuestra comunidad. Queremos compartir contigo las últimas novedades y ofertas especiales.
 
 Saludos cordiales,
-El equipo de Brevo`,
+El equipo de EmailSent`,
     selectedLists: [] as string[],
     selectedSegments: [] as string[],
     scheduling: "now" as "now" | "later",
@@ -395,8 +395,8 @@ El equipo de Brevo`,
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="jorge@brevo.com">
-                          Jorge &lt;jorge@brevo.com&gt;
+<SelectItem value="jorge@emailsent.com">
+                          Jorge &lt;jorge@emailsent.com&gt;
                         </SelectItem>
                         <SelectItem value="hola@empresa.com">
                           Equipo &lt;hola@empresa.com&gt;

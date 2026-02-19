@@ -475,7 +475,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
           </div>
           <button
             onClick={() => setShowBulkImport(true)}
-            className="text-sm text-violet-600 hover:text-violet-700 font-medium flex items-center gap-1"
+            className="text-sm text-primary hover:text-primary/80 font-medium flex items-center gap-1"
           >
             <Users className="h-3 w-3" />
             Importar emails

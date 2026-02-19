@@ -8,7 +8,7 @@ export function OnboardingSteps() {
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl font-semibold text-[#1A1A1A]">
-            Primeros pasos con Brevo
+            Primeros pasos con EmailSent
           </CardTitle>
           <Button className="bg-[#1A1A1A] hover:bg-[#374151]">
             Crear campaña

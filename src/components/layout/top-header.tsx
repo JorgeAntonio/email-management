@@ -65,9 +65,9 @@ export function TopHeader() {
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#00D26A]">
-              <span className="text-lg font-bold text-white">B</span>
+              <span className="text-lg font-bold text-white">E</span>
             </div>
-            <span className="text-xl font-bold text-[#1A1A1A]">Brevo</span>
+            <span className="text-xl font-bold text-[#1A1A1A]">EmailSent</span>
           </Link>
         </div>
 
