@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Brevo - Email Marketing & CRM',
+  title: 'EmailSent - Email Marketing & CRM',
   description: 'Plataforma de marketing y CRM',
 };
 

@@ -1,15 +1,14 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'bequi.site';
-const FROM_NAME = process.env.RESEND_FROM_NAME || 'BEQUI';
+const DEFAULT_FROM_EMAIL = process.env.SENDER_EMAIL || 'noreply@emailsent.com';
+const DEFAULT_FROM_NAME = process.env.SENDER_NAME || 'EmailSent';
+const DEFAULT_DOMAIN = process.env.SENDER_DOMAIN || 'emailsent.com';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { to, subject, html, fromName, replyTo } = body;
+    const { to, subject, html, replyTo, clientConfig } = body;
 
     if (!to || !subject || !html) {
       return NextResponse.json(
@@ -17,6 +16,22 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    const apiKey = clientConfig?.resendApiKey || process.env.RESEND_API_KEY;
+    
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: 'API key de Resend no configurada. Configúrala en Settings.' },
+        { status: 400 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
+    const fromName = clientConfig?.senderName || DEFAULT_FROM_NAME;
+    const fromEmail = clientConfig?.senderEmail || DEFAULT_FROM_EMAIL;
+    const domain = clientConfig?.domain || DEFAULT_DOMAIN;
+    
+    const from = `${fromName} <${fromEmail}>`;
 
     const recipients = Array.isArray(to) ? to : [to];
     
@@ -26,8 +41,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    const from = `${fromName || FROM_NAME} <onboarding@${FROM_EMAIL}>`;
 
     const results = [];
     const errors = [];

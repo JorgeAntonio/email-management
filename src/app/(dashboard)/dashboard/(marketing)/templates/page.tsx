@@ -66,7 +66,7 @@ const htmlSnippets = [
   { name: "Tarjeta", html: '<table role="presentation" style="width: 100%; border-collapse: collapse; margin: 24px 0;"><tr><td style="background-color: #f7fafc; border-radius: 12px; padding: 24px; border-left: 4px solid #667eea;"><h3 style="color: #2d3748; font-size: 18px; font-weight: 600; margin: 0 0 12px 0;">Título</h3><p style="color: #4a5568; font-size: 15px; line-height: 1.6; margin: 0;">Contenido de la tarjeta aquí</p></td></tr></table>' },
   { name: "Imagen", html: '<img src="https://via.placeholder.com/600x300" alt="Descripción" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; display: block;" />' },
   { name: "Divider", html: '<div style="width: 40px; height: 2px; background-color: #e0e0e0; margin: 32px 0;"></div>' },
-  { name: "Footer", html: '<table role="presentation" style="width: 100%; border-collapse: collapse;"><tr><td style="padding: 24px 40px; background-color: #f8f9fa; text-align: center;"><p style="color: #718096; font-size: 13px; margin: 0 0 8px 0;">¿Tienes preguntas? Responde a este correo</p><p style="color: #a0aec0; font-size: 12px; margin: 0;">© 2026 BEQUI. Todos los derechos reservados.</p></td></tr></table>' },
+  { name: "Footer", html: '<table role="presentation" style="width: 100%; border-collapse: collapse;"><tr><td style="padding: 24px 40px; background-color: #f8f9fa; text-align: center;"><p style="color: #718096; font-size: 13px; margin: 0 0 8px 0;">¿Tienes preguntas? Responde a este correo</p><p style="color: #a0aec0; font-size: 12px; margin: 0;">© 2026 EmailSent. Todos los derechos reservados.</p></td></tr></table>' },
 ];
 
 export default function TemplatesPage() {
@@ -171,7 +171,7 @@ export default function TemplatesPage() {
     processed = processed.replace(/{{asunto}}/g, editingTemplate?.name || "Asunto");
     processed = processed.replace(/{{mes}}/g, new Date().toLocaleDateString("es-ES", { month: "long" }));
     processed = processed.replace(/{{año}}/g, new Date().getFullYear().toString());
-    processed = processed.replace(/{{empresa}}/g, "BEQUI");
+    processed = processed.replace(/{{empresa}}/g, "EmailSent");
     return processed;
   };
 
@@ -191,7 +191,7 @@ export default function TemplatesPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg">
+              <div className="p-2 bg-gradient-to-br from-primary to-primary/80 rounded-lg">
                 <Layout className="h-6 w-6 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-slate-900">Plantillas</h1>
@@ -227,7 +227,7 @@ export default function TemplatesPage() {
                 <Button variant="outline" onClick={() => setEditingTemplate(null)}>
                   Cancelar
                 </Button>
-                <Button onClick={handleSaveEdit} className="bg-violet-600 hover:bg-violet-700">
+                <Button onClick={handleSaveEdit} className="bg-primary hover:bg-primary/90">
                   <Save className="h-4 w-4 mr-2" />
                   Guardar Cambios
                 </Button>
@@ -272,7 +272,7 @@ export default function TemplatesPage() {
                             <button
                               key={variable.key}
                               onClick={() => insertVariable(variable.key)}
-                              className="px-3 py-1.5 bg-violet-50 text-violet-700 rounded-lg text-sm hover:bg-violet-100 transition-colors"
+                              className="px-3 py-1.5 bg-primary/10 text-primary rounded-lg text-sm hover:bg-primary/20 transition-colors"
                               title={variable.description}
                             >
                               {variable.key}
@@ -297,7 +297,7 @@ export default function TemplatesPage() {
                           <button
                             key={index}
                             onClick={() => insertSnippet(snippet.html)}
-                            className="w-full text-left p-4 rounded-lg border border-slate-200 hover:border-violet-300 hover:bg-violet-50 transition-all"
+                            className="w-full text-left p-4 rounded-lg border border-slate-200 hover:border-primary/30 hover:bg-primary/10 transition-all"
                           >
                             <h4 className="font-medium text-slate-800">{snippet.name}</h4>
                             <p className="text-xs text-slate-500 mt-1 font-mono truncate">
@@ -417,7 +417,7 @@ export default function TemplatesPage() {
                   <CardContent className="p-5">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="font-semibold text-slate-900 group-hover:text-violet-600 transition-colors">
+                        <h3 className="font-semibold text-slate-900 group-hover:text-primary transition-colors">
                           {template.name}
                         </h3>
                         <p className="text-sm text-slate-500 mt-1 line-clamp-2">
@@ -538,7 +538,7 @@ export default function TemplatesPage() {
               <Button 
                 onClick={handleCreateTemplate}
                 disabled={!newTemplate.name || !newTemplate.description}
-                className="bg-violet-600 hover:bg-violet-700"
+                className="bg-primary hover:bg-primary/90"
               >
                 Crear Plantilla
               </Button>

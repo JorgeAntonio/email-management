@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -15,12 +15,49 @@ import {
   ChevronDown,
   HelpCircle,
   LayoutGrid,
+  LogOut,
   Settings,
   Sparkles,
+  User,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { createClient } from '@/utils/supabase/client';
+import { toast } from 'sonner';
+import { useEffect, useState } from 'react';
+import type { User as SupabaseUser } from '@supabase/supabase-js';
 
 export function TopHeader() {
+  const router = useRouter();
+  const supabase = createClient();
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+  }, [supabase]);
+
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+      toast.success('Sesión cerrada exitosamente');
+      router.push('/login');
+      router.refresh();
+    } catch (error) {
+      toast.error('Error al cerrar sesión');
+    }
+  };
+
+  const userInitial = user?.email?.charAt(0).toUpperCase() || 'U';
+  const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Usuario';
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#E5E7EB] bg-white">
       <div className="flex h-16 items-center justify-between px-6">
@@ -28,9 +65,9 @@ export function TopHeader() {
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#00D26A]">
-              <span className="text-lg font-bold text-white">B</span>
+              <span className="text-lg font-bold text-white">E</span>
             </div>
-            <span className="text-xl font-bold text-[#1A1A1A]">Brevo</span>
+            <span className="text-xl font-bold text-[#1A1A1A]">EmailSent</span>
           </Link>
         </div>
 
@@ -95,12 +132,13 @@ export function TopHeader() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="gap-2 pl-2">
                 <Avatar className="h-8 w-8">
+                  <AvatarImage src={user?.user_metadata?.avatar_url} />
                   <AvatarFallback className="bg-[#00D26A] text-white text-sm font-medium">
-                    J
+                    {userInitial}
                   </AvatarFallback>
                 </Avatar>
                 <span className="hidden md:inline text-sm font-medium text-[#1A1A1A]">
-                  Jorge
+                  {userName}
                 </span>
                 <ChevronDown className="h-4 w-4 text-[#6B7280]" />
               </Button>
@@ -108,11 +146,20 @@ export function TopHeader() {
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Perfil</DropdownMenuItem>
-              <DropdownMenuItem>Configuración</DropdownMenuItem>
-              <DropdownMenuItem>Facturación</DropdownMenuItem>
+              <DropdownMenuItem>
+                <User className="mr-2 h-4 w-4" />
+                Perfil
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings className="mr-2 h-4 w-4" />
+                Configuración
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-[#EF4444]">
+              <DropdownMenuItem 
+                onClick={handleLogout}
+                className="text-[#EF4444] cursor-pointer"
+              >
+                <LogOut className="mr-2 h-4 w-4" />
                 Cerrar sesión
               </DropdownMenuItem>
             </DropdownMenuContent>

@@ -148,10 +148,10 @@ export function DynamicApiExplorer() {
   return (
     <div className="space-y-6">
       {/* Header con Input de URL */}
-      <Card className="border-0 shadow-lg bg-gradient-to-br from-violet-50 to-purple-50">
+      <Card className="border-0 shadow-lg bg-gradient-to-br from-primary/10 to-primary/20">
         <CardHeader>
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg">
+            <div className="p-2 bg-gradient-to-br from-primary to-primary/80 rounded-lg">
               <Globe className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -170,7 +170,7 @@ export function DynamicApiExplorer() {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
-                className="h-12 border-slate-200 focus:border-violet-500 focus:ring-violet-500"
+                className="h-12 border-slate-200 focus:border-primary focus:ring-primary"
               />
             </div>
             <Button
@@ -350,8 +350,8 @@ export function DynamicApiExplorer() {
                       <div
                         key={mapping.originalPath}
                         className={`flex items-center gap-4 p-4 rounded-lg border transition-all ${
-                          mapping.isSelected
-                            ? 'bg-violet-50/50 border-violet-200'
+mapping.isSelected
+                            ? 'bg-primary/10 border-primary/30'
                             : 'bg-slate-50 border-slate-200 opacity-60'
                         }`}
                       >
@@ -401,7 +401,7 @@ export function DynamicApiExplorer() {
                                 className="flex items-center gap-2 mt-1 cursor-pointer group"
                                 onClick={() => handleStartEdit(mapping.originalPath, mapping.standardName)}
                               >
-                                <code className="px-2 py-1 bg-violet-100 text-violet-800 rounded text-sm font-mono">
+                                <code className="px-2 py-1 bg-primary/20 text-primary rounded text-sm font-mono">
                                   {mapping.standardName}
                                 </code>
                                 <span className="text-xs text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
