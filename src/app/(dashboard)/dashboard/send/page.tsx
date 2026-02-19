@@ -152,7 +152,7 @@ export default function SendEmailPage() {
         <div className="bg-white border-b px-6 py-4">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl shadow-lg">
+              <div className="p-2 bg-gradient-to-br from-primary to-primary/80 rounded-xl shadow-lg">
                 <Mail className="h-6 w-6 text-white" />
               </div>
               <div>
@@ -165,7 +165,7 @@ export default function SendEmailPage() {
                 setEditingDraft(null);
                 setShowCompose(true);
               }}
-              className="bg-violet-600 hover:bg-violet-700 text-white shadow-lg shadow-violet-200"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20"
             >
               <Plus className="h-4 w-4 mr-2" />
               Nuevo mensaje
@@ -221,8 +221,8 @@ export default function SendEmailPage() {
               <div className="h-full flex items-center justify-center p-8">
                 <Card className="max-w-md w-full border-0 shadow-xl">
                   <CardHeader className="text-center pb-4">
-                    <div className="w-20 h-20 bg-gradient-to-br from-violet-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Mail className="h-10 w-10 text-violet-600" />
+                    <div className="w-20 h-20 bg-gradient-to-br from-primary/10 to-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Mail className="h-10 w-10 text-primary" />
                     </div>
                     <CardTitle className="text-xl">Crear nuevo mensaje</CardTitle>
                     <CardDescription className="text-base">
@@ -232,7 +232,7 @@ export default function SendEmailPage() {
                   <CardContent className="space-y-4">
                     <Button
                       onClick={() => setShowCompose(true)}
-                      className="w-full h-12 bg-violet-600 hover:bg-violet-700 text-white"
+                      className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground"
                     >
                       <Plus className="h-5 w-5 mr-2" />
                       Comenzar a escribir
@@ -455,7 +455,7 @@ export default function SendEmailPage() {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className="block mt-2 text-violet-600"
+                                className="block mt-2 text-primary"
                               >
                                 Ver estadísticas
                                 <ChevronRight className="h-3 w-3 ml-1" />

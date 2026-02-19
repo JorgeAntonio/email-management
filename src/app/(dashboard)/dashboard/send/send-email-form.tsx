@@ -325,14 +325,14 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
         {/* Para */}
         <div className="flex items-start gap-2">
           <span className="text-sm text-slate-500 w-12 pt-2 shrink-0">Para</span>
-          <div className="flex-1 flex flex-wrap items-center gap-2 min-h-[40px] p-2 border rounded-lg focus-within:ring-2 focus-within:ring-violet-500 focus-within:border-violet-500 bg-white">
+          <div className="flex-1 flex flex-wrap items-center gap-2 min-h-[40px] p-2 border rounded-lg focus-within:ring-2 focus-within:ring-primary focus-within:border-primary bg-white">
             {toRecipients.map((recipient) => (
               <Badge
                 key={recipient.id}
                 variant={recipient.isValid ? 'secondary' : 'destructive'}
                 className={`flex items-center gap-1 px-2 py-1 ${
                   recipient.isValid 
-                    ? 'bg-violet-50 text-violet-700 hover:bg-violet-100' 
+                    ? 'bg-primary/10 text-primary hover:bg-primary/20' 
                     : 'bg-red-50 text-red-700'
                 }`}
               >
@@ -369,7 +369,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
         {showCc && (
           <div className="flex items-start gap-2">
             <span className="text-sm text-slate-500 w-12 pt-2 shrink-0">Cc</span>
-            <div className="flex-1 flex flex-wrap items-center gap-2 min-h-[40px] p-2 border rounded-lg focus-within:ring-2 focus-within:ring-violet-500 focus-within:border-violet-500 bg-white">
+            <div className="flex-1 flex flex-wrap items-center gap-2 min-h-[40px] p-2 border rounded-lg focus-within:ring-2 focus-within:ring-primary focus-within:border-primary bg-white">
               {ccRecipients.map((recipient) => (
                 <Badge
                   key={recipient.id}
@@ -413,7 +413,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
         {showBcc && (
           <div className="flex items-start gap-2">
             <span className="text-sm text-slate-500 w-12 pt-2 shrink-0">Cco</span>
-            <div className="flex-1 flex flex-wrap items-center gap-2 min-h-[40px] p-2 border rounded-lg focus-within:ring-2 focus-within:ring-violet-500 focus-within:border-violet-500 bg-white">
+            <div className="flex-1 flex flex-wrap items-center gap-2 min-h-[40px] p-2 border rounded-lg focus-within:ring-2 focus-within:ring-primary focus-within:border-primary bg-white">
               {bccRecipients.map((recipient) => (
                 <Badge
                   key={recipient.id}
@@ -459,7 +459,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
             {!showCc && (
               <button
                 onClick={() => setShowCc(true)}
-                className="text-sm text-violet-600 hover:text-violet-700 font-medium"
+                className="text-sm text-primary hover:text-primary/80 font-medium"
               >
                 Cc
               </button>
@@ -467,7 +467,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
             {!showBcc && (
               <button
                 onClick={() => setShowBcc(true)}
-                className="text-sm text-violet-600 hover:text-violet-700 font-medium"
+                className="text-sm text-primary hover:text-primary/80 font-medium"
               >
                 Cco
               </button>
@@ -488,7 +488,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
             placeholder="Asunto"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            className="flex-1 border-0 border-b rounded-none px-0 focus-visible:ring-0 focus-visible:border-violet-500 text-base font-medium"
+            className="flex-1 border-0 border-b rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary text-base font-medium"
           />
         </div>
       </div>
@@ -498,7 +498,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="sm" className="gap-1">
-              <Sparkles className="h-4 w-4 text-violet-500" />
+              <Sparkles className="h-4 w-4 text-primary" />
               Plantilla
               <ChevronDown className="h-3 w-3" />
             </Button>
@@ -577,7 +577,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
           variant="ghost"
           size="sm"
           onClick={() => setIsHtmlMode(!isHtmlMode)}
-          className={isHtmlMode ? 'text-violet-600' : ''}
+          className={isHtmlMode ? 'text-primary' : ''}
         >
           HTML
         </Button>
@@ -684,7 +684,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
           <Button
             onClick={handleSend}
             disabled={!isValid() || sending}
-            className="bg-violet-600 hover:bg-violet-700 text-white px-6"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-6"
           >
             {sending ? (
               <>
