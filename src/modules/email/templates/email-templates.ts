@@ -77,7 +77,7 @@ export const emailTemplates: EmailTemplate[] = [
           <tr>
             <td style="padding: 24px 40px; border-top: 1px solid #f0f0f0;">
               <p style="color: #999; font-size: 12px; margin: 0; text-align: center;">
-                © 2026 BEQUI. Todos los derechos reservados.
+                © 2026 EmailSent. Todos los derechos reservados.
               </p>
             </td>
           </tr>
@@ -155,7 +155,7 @@ export const emailTemplates: EmailTemplate[] = [
                 ¿Tienes preguntas? Responde a este correo
               </p>
               <p style="color: #a0aec0; font-size: 12px; margin: 0;">
-                © 2026 BEQUI. Todos los derechos reservados.
+                © 2026 EmailSent. Todos los derechos reservados.
               </p>
             </td>
           </tr>
@@ -190,7 +190,7 @@ export const emailTemplates: EmailTemplate[] = [
               <p style="color: #a0a0a0; font-size: 18px; margin: 0 0 32px 0;">En tu próxima compra</p>
               <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.3); border-radius: 16px; padding: 32px; margin: 24px 0;">
                 <p style="color: #ffd700; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 16px 0;">Código de Descuento</p>
-                <p style="color: #ffffff; font-size: 32px; font-weight: 700; font-family: 'Courier New', monospace; letter-spacing: 4px; margin: 0;">BEQUI50</p>
+                <p style="color: #ffffff; font-size: 32px; font-weight: 700; font-family: 'Courier New', monospace; letter-spacing: 4px; margin: 0;">EMAIL50</p>
               </div>
             </td>
           </tr>
@@ -212,7 +212,7 @@ export const emailTemplates: EmailTemplate[] = [
           <tr>
             <td style="padding: 24px 40px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
               <p style="color: #666; font-size: 12px; margin: 0;">
-                © 2026 BEQUI. Promoción sujeta a términos y condiciones.
+                © 2026 EmailSent. Promoción sujeta a términos y condiciones.
               </p>
             </td>
           </tr>
@@ -312,7 +312,7 @@ export const emailTemplates: EmailTemplate[] = [
           <tr>
             <td style="padding: 32px 40px; border-bottom: 1px solid #e8eaed;">
               <div style="display: flex; align-items: center; justify-content: space-between;">
-                <span style="font-size: 20px; font-weight: 700; color: #1a1a1a;">BEQUI</span>
+                <span style="font-size: 20px; font-weight: 700; color: #1a1a1a;">EmailSent</span>
                 <span style="font-size: 13px; color: #00c853; font-weight: 600; background-color: rgba(0,200,83,0.1); padding: 6px 12px; border-radius: 4px;">✓ Completado</span>
               </div>
             </td>
@@ -356,7 +356,7 @@ export const emailTemplates: EmailTemplate[] = [
           <tr>
             <td style="padding: 24px 40px; background-color: #f8f9fa; border-radius: 0 0 8px 8px; text-align: center;">
               <p style="color: #888; font-size: 12px; margin: 0;">
-                © 2026 BEQUI. Todos los derechos reservados.
+                © 2026 EmailSent. Todos los derechos reservados.
               </p>
             </td>
           </tr>

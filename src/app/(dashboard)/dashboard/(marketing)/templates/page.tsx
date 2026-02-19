@@ -66,7 +66,7 @@ const htmlSnippets = [
   { name: "Tarjeta", html: '<table role="presentation" style="width: 100%; border-collapse: collapse; margin: 24px 0;"><tr><td style="background-color: #f7fafc; border-radius: 12px; padding: 24px; border-left: 4px solid #667eea;"><h3 style="color: #2d3748; font-size: 18px; font-weight: 600; margin: 0 0 12px 0;">Título</h3><p style="color: #4a5568; font-size: 15px; line-height: 1.6; margin: 0;">Contenido de la tarjeta aquí</p></td></tr></table>' },
   { name: "Imagen", html: '<img src="https://via.placeholder.com/600x300" alt="Descripción" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; display: block;" />' },
   { name: "Divider", html: '<div style="width: 40px; height: 2px; background-color: #e0e0e0; margin: 32px 0;"></div>' },
-  { name: "Footer", html: '<table role="presentation" style="width: 100%; border-collapse: collapse;"><tr><td style="padding: 24px 40px; background-color: #f8f9fa; text-align: center;"><p style="color: #718096; font-size: 13px; margin: 0 0 8px 0;">¿Tienes preguntas? Responde a este correo</p><p style="color: #a0aec0; font-size: 12px; margin: 0;">© 2026 BEQUI. Todos los derechos reservados.</p></td></tr></table>' },
+  { name: "Footer", html: '<table role="presentation" style="width: 100%; border-collapse: collapse;"><tr><td style="padding: 24px 40px; background-color: #f8f9fa; text-align: center;"><p style="color: #718096; font-size: 13px; margin: 0 0 8px 0;">¿Tienes preguntas? Responde a este correo</p><p style="color: #a0aec0; font-size: 12px; margin: 0;">© 2026 EmailSent. Todos los derechos reservados.</p></td></tr></table>' },
 ];
 
 export default function TemplatesPage() {
@@ -171,7 +171,7 @@ export default function TemplatesPage() {
     processed = processed.replace(/{{asunto}}/g, editingTemplate?.name || "Asunto");
     processed = processed.replace(/{{mes}}/g, new Date().toLocaleDateString("es-ES", { month: "long" }));
     processed = processed.replace(/{{año}}/g, new Date().getFullYear().toString());
-    processed = processed.replace(/{{empresa}}/g, "BEQUI");
+    processed = processed.replace(/{{empresa}}/g, "EmailSent");
     return processed;
   };
 
