@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
 import { BulkImportDialog } from './bulk-import-dialog';
+import { ResendConfigDialog } from './resend-config-dialog';
 import {
   Send,
   Eye,
@@ -46,6 +47,7 @@ import {
   AlignLeft,
   AlignCenter,
   AlignRight,
+  Settings,
 } from 'lucide-react';
 
 // Tipos
@@ -81,6 +83,7 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
   const [sending, setSending] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showBulkImport, setShowBulkImport] = useState(false);
+  const [showResendConfig, setShowResendConfig] = useState(false);
   
   const { sendEmail, isLoading } = useEmailSender();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -293,6 +296,15 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
           )}
         </div>
         <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowResendConfig(true)}
+            title="Configuración de Resend"
+          >
+            <Settings className="h-4 w-4" />
+            <span className="ml-2 hidden sm:inline">Resend</span>
+          </Button>
           <Button
             variant="ghost"
             size="sm"
@@ -729,6 +741,12 @@ export function SendEmailForm({ onClose, draftId }: SendEmailFormProps) {
         open={showBulkImport}
         onOpenChange={setShowBulkImport}
         onImport={handleBulkImport}
+      />
+
+      {/* Dialog de Configuración de Resend */}
+      <ResendConfigDialog
+        open={showResendConfig}
+        onOpenChange={setShowResendConfig}
       />
     </div>
   );
